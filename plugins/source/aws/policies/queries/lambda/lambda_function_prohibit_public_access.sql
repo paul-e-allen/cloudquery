@@ -19,5 +19,7 @@ where statement ->> 'Effect' = 'Allow'
     and (
         statement ->> 'Principal' = '*'
         or statement -> 'Principal' ->> 'AWS' = '*'
-        or (statement -> 'Principal' ->> 'AWS')::JSONB ? '*'
+-- Skip clause that generates errors. 
+-- See https://github.com/cloudquery/cloudquery/issues/9763
+--        or (statement -> 'Principal' ->> 'AWS')::JSONB ? '*'
     )
